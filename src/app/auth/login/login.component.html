@@ -1,0 +1,159 @@
+<main class="main">
+  <section class="section-box shop-template mt-60">
+    <div class="container">
+      <div class="row mb-100">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-5">
+          <h3>Member Login</h3>
+          <p class="font-md color-gray-500">Welcome back!</p>
+          <!-- begin::Alert error-->
+          <ng-container *ngIf="hasError">
+            <div class="mb-lg-15 alert alert-danger">
+              <div class="alert-text font-weight-bold">
+                {{errorMessage}}
+              </div>
+            </div>
+          </ng-container>
+          <!-- end::Alert error-->
+
+          <form (ngSubmit)="submitData()" [formGroup]="loginForm">
+            <div class="form-register mt-30 mb-30">
+              <div class="form-group">
+                <label class="mb-5 font-sm color-gray-700">Email / Phone / Username *</label>
+                <input class="form-control" formControlName="username" placeholder="Enter your email/username"
+                       type="text">
+                <ng-container
+                  [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'field is required',
+        control: loginForm.controls['username']
+      }"
+                  [ngTemplateOutlet]="formError"
+                ></ng-container>
+                <ng-container
+                  [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Field should have at least 3 symbols',
+        control: loginForm.controls['username']
+      }"
+                  [ngTemplateOutlet]="formError"
+                ></ng-container>
+                <ng-container
+                  [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'Field should have maximum 100 symbols',
+        control: loginForm.controls['username']
+      }"
+                  [ngTemplateOutlet]="formError"
+                ></ng-container>
+              </div>
+              <div class="form-group">
+                <label class="mb-5 font-sm color-gray-700">Password *</label>
+                <input class="form-control" formControlName="password" placeholder="Enter your password"
+                       type="password">
+                <ng-container
+                  [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Password is required',
+        control: loginForm.controls['password']
+      }"
+                  [ngTemplateOutlet]="formError"
+                ></ng-container>
+                <ng-container
+                  [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Password should have at least 8 symbols',
+        control: loginForm.controls['password']
+      }"
+                  [ngTemplateOutlet]="formError"
+                ></ng-container>
+                <ng-container
+                  [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'Password should have maximum 100 symbols',
+        control: loginForm.controls['password']
+      }"
+                  [ngTemplateOutlet]="formError"
+                ></ng-container>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="color-gray-500 font-xs">
+                      <input class="checkagree" type="checkbox">Remember me
+                    </label>
+                  </div>
+                </div>
+                <div class="col-lg-6 text-end">
+                  <div class="form-group"><a class="font-xs color-gray-500" href="#">Forgot your password?</a></div>
+                </div>
+              </div>
+              <div class="form-group">
+
+                <button [disabled]="loginForm.invalid" class="font-md-bold btn btn-buy" type="submit">
+                  <ng-container *ngIf="isLoading.loadingLogin === false"> Sign Up</ng-container>
+                  <ng-container *ngIf="isLoading.loadingLogin === true">
+                    <span [style.display]="'block'" class="indicator-progress">
+                       wait...{{ " " }}
+                      <span
+                        class="
+                          spinner-border spinner-border-sm
+                          align-middle
+                          ms-2
+                        "
+                      ></span>
+                    </span>
+                  </ng-container>
+                </button>
+
+              </div>
+              <div class="mt-20">
+                <span class="font-xs color-gray-500 font-medium">Have not an account?</span>
+                <a class="font-xs color-brand-3 font-medium" routerLink="/auth/registration">Sign Up</a>
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <div class="col-lg-5"></div>
+      </div>
+    </div>
+  </section>
+  <section class="section-box box-newsletter">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-7 col-sm-12">
+          <h3 class="color-white">Subscrible &amp; Get <span class="color-warning">10%</span> Discount</h3>
+          <p class="font-lg color-white">Get E-mail updates about our latest shop and <span class="font-lg-bold">special offers.</span>
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-5 col-sm-12">
+          <div class="box-form-newsletter mt-15">
+            <form class="form-newsletter">
+              <input class="input-newsletter font-xs" placeholder="Your email Address" value="">
+              <button class="btn btn-brand-2">Sign Up</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert" class="alert-text">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

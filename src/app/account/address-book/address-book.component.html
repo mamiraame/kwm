@@ -1,0 +1,344 @@
+<div id="container">
+  <div class="book">
+    <div>
+      <div class="mod-address-book">
+        <div class="mod-address-book-hd">
+          <span (click)="lgModal.show()" class="mod-address-book-ft-content">
+            Add New Address
+          </span>
+        </div>
+        <div class="mod-address-book-content" *ngIf="addressList.length>0">
+          <div class="mod-address-book-card-box">
+            <div *ngFor="let address of addressList; let i = index" class="mod-address-book-card mod-address-book-card-bigger">
+              <div class="mod-address-book-card-name">{{address.contact_other}}
+                <button (click)="openModal(modelAddressUpdate, address)"  class="next-btn next-btn-text next-btn-primary next-btn-medium mod-address-book-card-edit"
+
+                        type="button">EDIT
+                </button>
+              </div>
+              <div class="mod-address-book-card-phone">{{address.contact_personal}}</div>
+              <div class="mod-address-book-card-address">Punjab,Lahore - {{address.complete_address}}
+              </div>
+              <div></div>
+              <div class="mod-address-book-card-tags"><small class="mod-address-book-card-tag">Home</small><small
+                class="mod-address-book-card-tag-default">DEFAULT DELIVERY ADDRESS</small><small
+                class="mod-address-book-card-tag-default">DEFAULT BILLING ADDRESS</small></div>
+            </div>
+
+          </div>
+        </div>
+        <div *ngIf="addressList.length===0 && isNoAddress" class="mod-address-book-content d-flex  justify-content-center">
+           <h3 (click)="lgModal.show()" class="align-content-center address-btn">Add New Address</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--model to add new address-->
+<div #lgModal="bs-modal" aria-labelledby="dialog-sizes-name1" bsModal class="modal fade"
+     role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title pull-left" id="dialog-sizes-name1">Add New Delivery Address
+        </h5>
+        <button (click)="lgModal.hide()" aria-label="Close" class="btn-close close pull-right" type="button">
+          <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addressForm" (ngSubmit)="submitData()">
+        <div class="row">
+          <!-- Left row-->
+          <div class="col-lg-6 mb-20">
+            <!--name input-->
+            <div class="col-lg-12 ">
+                  <div class="form-group">
+                    <label class="mb-2 "> Full Name<span class="text-danger">*</span></label>
+                    <input formControlName="fullName" class="form-control font-sm" placeholder="Full name" type="text">
+                    <div class="text-danger" *ngIf="addressForm.controls['fullName'].invalid && addressForm.controls['fullName'].touched">
+                      Name is required
+                    </div>
+                  </div>
+                </div>
+            <!--mobile number input-->
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="mb-2"> Mobile Number<span class="text-danger">*</span></label>
+                <input formControlName="contact_personal" class="form-control font-sm" placeholder="Phone number" type="text">
+                <div class="text-danger" *ngIf="addressForm.controls['contact_personal'].invalid && addressForm.controls['contact_personal'].touched">
+                  Mobile number is required
+                </div>
+              </div>
+            </div>
+
+            <!--country input-->
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="mb-2"> Country<span class="text-danger">*</span></label>
+                <select class="form-control font-sm select-style1 color-gray-700" formControlName="country" (ngModelChange)="onCountryChange($event)">
+                  <option value="">Select Country...</option>
+                  <option value="{{country.id}}" *ngFor="let country of countriesList">{{country.name}}</option>
+                </select>
+                <div class="text-danger" *ngIf="addressForm.controls['country'].invalid && addressForm.controls['country'].touched">
+                  Country is Required
+                </div>
+              </div>
+
+            </div>
+            <!--state input-->
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="mb-2">State</label>
+                <select class="form-control font-sm select-style1 color-gray-700" formControlName="state" (ngModelChange)="onStateChange($event)" >
+                  <option value="">Select State...</option>
+                  <option value="{{state.id}}" *ngFor="let state of countryStateList">{{state.name}}</option>
+                </select>
+              </div>
+            </div>
+            <!--city input-->
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="mb-2">City</label>
+                <select class="form-control font-sm select-style1 color-gray-700" formControlName="city">
+                  <option value="">Select City...</option>
+                  <option value="{{city.id}}" *ngFor="let city of cityList">{{city.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <!--Right row-->
+          <div class="col-lg-6 mb-20">
+            <!--zip code input-->
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="mb-2 required">Post/Zip Code<span class="text-danger">*</span></label>
+                <input formControlName="postal_code" required class="form-control font-sm" placeholder="Post / ZIP code" type="text">
+                <div class="text-danger" *ngIf="addressForm.controls['postal_code'].invalid && addressForm.controls['postal_code'].touched">
+                  Postal/Zip code is Required
+                </div>
+              </div>
+            </div>
+            <!--home number input-->
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="mb-2"> Contact Home</label>
+                <input formControlName="contact_home" class="form-control font-sm" placeholder="Enter Home Phone number" type="text">
+              </div>
+            </div>
+            <!--full address input-->
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="mb-2 required">Address<span class="text-danger">*</span></label>
+                <input formControlName="complete_address" class="form-control font-sm" placeholder="Address*" type="text">
+                <div class="text-danger" *ngIf="addressForm.controls['complete_address'].invalid && addressForm.controls['complete_address'].touched">
+                  Full Address is Required
+                </div>
+              </div>
+            </div>
+            <!--address type input-->
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label class="mb-2">Default Address (Optional)</label>
+                <div  class="p-2 box-default">
+                  <div class="d-flex align-items-center mb-1">
+                    <input class="me-1 checkBox-size" formControlName="shipping_address"  type="checkbox" >
+                    <span class="">Default delivery address</span>
+                  </div>
+                  <div class="d-flex align-items-center mb-1">
+                    <input class="me-1 checkBox-size" formControlName="billing_address" type="checkbox" >
+                    <span class="">Default billing address</span>
+                  </div>
+                  <p >
+                    Your existing default address setting will be replaced if you make
+                    some changes here.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <!--button save address-->
+          <div class="col-lg-12 ">
+            <div class="d-flex form-group mt-20 align-items-end justify-content-end">
+
+              <button [disabled]="addressForm.invalid" class="font-md-bold btn btn-buy" type="submit">
+                <ng-container *ngIf="isLoading.loadingLogin === false"> Save Address</ng-container>
+                <ng-container *ngIf="isLoading.loadingLogin === true">
+                    <span [style.display]="'block'" class="indicator-progress">
+                       Wait Saving...{{ " " }}
+                      <span
+                        class="
+                          spinner-border spinner-border-sm
+                          align-middle
+                          ms-2
+                        "
+                      ></span>
+                    </span>
+                </ng-container>
+              </button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--model to update address-->
+<ng-template #modelAddressUpdate>
+
+
+        <div class="modal-header">
+          <h5 class="modal-title pull-left" >Update Delivery Address
+          </h5>
+          <button (click)="modalRef?.hide()" aria-label="Close" class="btn-close close pull-right" type="button">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="addressUpdateForm" (ngSubmit)="updateAddress()">
+            <div class="row">
+              <div class="col-lg-6 mb-20">
+                <!--name input-->
+                <div class="col-lg-12 ">
+                  <div class="form-group">
+                    <label class="mb-2 "> Full Name<span class="text-danger">*</span></label>
+                    <input formControlName="fullName" class="form-control font-sm" placeholder="Full name" type="text">
+                    <div class="text-danger" *ngIf="addressForm.controls['fullName'].invalid && addressForm.controls['fullName'].touched">
+                      Name is required
+                    </div>
+                  </div>
+                </div>
+                <!--mobile phone input-->
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="mb-2"> Mobile Number<span class="text-danger">*</span></label>
+                    <input formControlName="contact_personal" class="form-control font-sm" placeholder="Phone number" type="text">
+                    <div class="text-danger" *ngIf="addressForm.controls['contact_personal'].invalid && addressForm.controls['contact_personal'].touched">
+                      Mobile number is required
+                    </div>
+                  </div>
+                </div>
+                <!--country input-->
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="mb-2"> Country<span class="text-danger">*</span></label>
+                    <select class="form-control font-sm select-style1 color-gray-700" formControlName="country" (ngModelChange)="onCountryUpdate($event)">
+                      <option value="">Select Country...</option>
+                      <option value="{{country.id}}" *ngFor="let country of countriesList">{{country.name}}</option>
+                    </select>
+                    <div class="text-danger" *ngIf="addressForm.controls['country'].invalid && addressForm.controls['country'].touched">
+                      Country is Required
+                    </div>
+                  </div>
+
+                </div>
+                <!--state input-->
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="mb-2">State</label>
+                    <select class="form-control font-sm select-style1 color-gray-700" formControlName="state" (ngModelChange)="onStateUpdate($event)" >
+                      <option value="">Select State...</option>
+                      <option value="{{state.id}}" *ngFor="let state of countryStateList">{{state.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <!--city input-->
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="mb-2">City</label>
+                    <select class="form-control font-sm select-style1 color-gray-700" formControlName="city">
+                      <option value="">Select City...</option>
+                      <option value="{{city.id}}" *ngFor="let city of cityList">{{city.name}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 mb-20">
+                <!--zip code input-->
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="mb-2 required">Post/Zip Code<span class="text-danger">*</span></label>
+                    <input formControlName="postal_code" required class="form-control font-sm" placeholder="Post / ZIP code" type="text">
+                    <div class="text-danger" *ngIf="addressForm.controls['postal_code'].invalid && addressForm.controls['postal_code'].touched">
+                      Postal/Zip code is Required
+                    </div>
+                  </div>
+                </div>
+                <!--home number input-->
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="mb-2"> Contact Home</label>
+                    <input formControlName="contact_home" class="form-control font-sm" placeholder="Enter Home Phone number" type="text">
+                  </div>
+                </div>
+                <!--full address input-->
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="mb-2 required">Address<span class="text-danger">*</span></label>
+                    <input formControlName="complete_address" class="form-control font-sm" placeholder="Address*" type="text">
+                    <div class="text-danger" *ngIf="addressForm.controls['complete_address'].invalid && addressForm.controls['complete_address'].touched">
+                      Full Address is Required
+                    </div>
+                  </div>
+                </div>
+                <!--address type input-->
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label class="mb-2">Default Address (Optional)</label>
+                    <div  class="p-2 box-default">
+                      <div class="d-flex align-items-center mb-1">
+                        <input class="me-1 checkBox-size"  type="checkbox" formControlName="shipping_address">
+                        <span class="">Default delivery address</span>
+                      </div>
+                      <div class="d-flex align-items-center mb-1">
+                        <input class="me-1 checkBox-size"  type="checkbox" formControlName="billing_address">
+                        <span class="">Default billing address</span>
+                      </div>
+                      <p >
+                        Your existing default address setting will be replaced if you make
+                        some changes here.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+              </div>
+            </div>
+            <div class="col-lg-12 ">
+              <div class="d-flex form-group mt-20 align-items-end justify-content-end">
+
+                <button [disabled]="addressUpdateForm.invalid" class="font-md-bold btn btn-buy" type="submit">
+                  <ng-container *ngIf="isLoading.loadingLogin === false"> Update Address</ng-container>
+                  <ng-container *ngIf="isLoading.loadingLogin === true">
+                    <span [style.display]="'block'" class="indicator-progress">
+                       Wait Updating...{{ " " }}
+                      <span
+                        class="
+                          spinner-border spinner-border-sm
+                          align-middle
+                          ms-2
+                        "
+                      ></span>
+                    </span>
+                  </ng-container>
+                </button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+
+</ng-template>
+
+
+<notifier-container></notifier-container>

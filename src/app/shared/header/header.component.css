@@ -1,0 +1,11 @@
+/* CSS */
+.sign-out-link {
+  /* Add your regular styles here */
+}
+
+.sign-out-link:hover {
+  /* Add your hover styles here */
+  color: #0BA9ED; /* Example hover color */
+  cursor: pointer;
+}
+

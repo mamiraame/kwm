@@ -1,0 +1,72 @@
+<main class="main" style="background-color: #eff0f4;">
+  <div class="container box-account-template">
+    <div class="lzd-playground">
+      <div class="lzd-playground-main">
+              <!--side bar-->
+        <div class="lzd-playground-nav">
+          <div class="member-info">
+            <p>
+              <span>Hello,&nbsp;</span>
+              <span>3018021151</span>
+            </p>
+            <div class="label-user verified">
+              <img alt="" height="20px" src="//laz-img-cdn.alicdn.com/tfs/TB1Yvbxh8HH8KJjy0FbXXcqlpXa-208-40.png">
+            </div>
+
+          </div>
+          <ul class="nav-container">
+            <li class="item"  id="Manage-My-Account"><a [class.main-active]="isActive('account')" (click)="changePage('account')" ><span>Manage My Account</span></a>
+              <ul class="item-container">
+                <li class="sub" [class.sub-active]="isActive('profile')" (click)="changePage('profile')" id="My-profile"><a>My Profile</a></li>
+                <li class="sub" [class.sub-active]="isActive('address')" (click)="changePage('address')" id="Address-book"><a>Address Book</a></li>
+                <li class="sub" id="Payment-methods"><a>My Payment Options</a></li>
+                <li class="sub" id="e-Wallet"><a>My Wallet</a></li>
+                <li class="sub" id="Vouchers"><a>Vouchers</a></li>
+              </ul>
+            </li>
+            <li class="item" id="My-Orders"><a><span>My Orders</span></a>
+              <ul class="item-container">
+                <li class="sub" id="Returns"><a>My Returns</a></li>
+                <li class="sub" id="Cancellations"><a>My Cancellations</a></li>
+              </ul>
+            </li>
+            <li class="item" id="My-Reviews"><a><span>My Reviews</span></a>
+              <ul class="item-container">
+
+              </ul>
+            </li>
+            <li class="item" id="My-Wishlists"><a><span>My Wishlist &amp; Followed Stores</span></a>
+              <ul class="item-container">
+
+              </ul>
+            </li>
+            <li class="item" id="Sell-On-Lazada"><a><span>Sell On Abillionz</span></a>
+              <ul class="item-container">
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="lzd-playground-right">
+          <div class="title-tab"><a>MY {{pageType.toUpperCase()}}</a></div>
+
+
+          <!--dashboard-->
+          <ng-container *ngIf="pageType==='account'">
+            <app-my-account [user]="user"></app-my-account>
+          </ng-container>
+          <!-- profile-->
+          <ng-container *ngIf="pageType==='profile'">
+            <app-profile></app-profile>
+          </ng-container>
+          <!-- address book -->
+          <ng-container *ngIf="pageType==='address'">
+            <app-address-book></app-address-book>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<notifier-container></notifier-container>

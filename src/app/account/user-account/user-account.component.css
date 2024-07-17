@@ -1,0 +1,133 @@
+
+.lzd-playground {
+  width: 100%;
+  min-width: 1188px;
+  min-height: 474px;
+  position: relative;
+  padding-bottom: 40px;
+
+}
+.lzd-playground-main {
+  position: relative;
+  width: 1188px;
+  min-width: 1188px;
+  margin: 0 auto;
+}
+.lzd-playground-nav {
+  position: absolute;
+
+  width: 158px;
+  height: 438px;
+  padding-top: 16px;
+}
+.lzd-playground-nav .member-info {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  line-height: 22px;
+  color: #424242;
+  letter-spacing: 0;
+
+}
+.lzd-playground-nav .member-info>p {
+  line-height: 22px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 158px;
+  display: block;
+  overflow: hidden;
+}
+.lzd-playground-nav .member-info .label-user {
+  border-radius: 20px;
+  height: 20px;
+  line-height: 20px;
+  margin-top: 4px;
+}
+.lzd-playground-nav .member-info .label-user img {
+  float: left;
+  margin: 4px 0 0 4px;
+}
+.lzd-playground-nav .member-info>p span {
+  display: inline-block;
+  line-height: 22px;
+  height: 22px;
+}
+.lzd-playground-nav .nav-container {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  color: #424242;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+.lzd-playground-nav .nav-container .item {
+  margin: 16px 0 0;
+}
+.lzd-playground-nav .nav-container .item .item-container {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+.lzd-playground-nav .nav-container .item>a {
+  text-decoration: none;
+  color: #424242;
+  font-size: medium;
+}
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  unicode-bidi: isolate;
+}
+.lzd-playground-right {
+  position: relative;
+  margin-left: 201px;
+}
+.lzd-playground-right .breadcrumb {
+  height: 60px;
+  line-height: 60px;
+  font-family: Roboto-Regular, serif;
+  font-size: 13px;
+  color: #5d5d5d;
+  letter-spacing: .09px;
+}
+#container, .layout-loading {
+  width: 988px;
+  min-height: 560px;
+  margin: 0 auto 30px;
+}
+
+
+
+
+.lzd-playground-right .title-tab {
+  height: 60px;
+  line-height: 60px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  color: #5d5d5d;
+  letter-spacing: .09px;
+}
+
+
+
+.lzd-playground-nav .nav-container .item .item-container .sub a {
+  cursor: pointer;
+  color: #757575;
+  letter-spacing: 0;
+  line-height: 22px;
+  text-decoration: none;
+}
+.lzd-playground-nav .nav-container .item .item-container .sub-active a {
+  color: #1a9cb7;
+}
+.lzd-playground-nav .nav-container .item .item-container  .sub a:hover {
+  color: #0BA9ED;
+}
+.lzd-playground-nav .nav-container .item .main-active {
+  color: #1a9cb7;
+}
+
+/* link color 8C9EC5*/
+/*hover color 425A8B*/
