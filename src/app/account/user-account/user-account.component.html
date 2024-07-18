@@ -7,7 +7,7 @@
           <div class="member-info">
             <p>
               <span>Hello,&nbsp;</span>
-              <span>3018021151</span>
+              <span>{{user.name}}</span>
             </p>
             <div class="label-user verified">
               <img alt="" height="20px" src="//laz-img-cdn.alicdn.com/tfs/TB1Yvbxh8HH8KJjy0FbXXcqlpXa-208-40.png">
@@ -16,35 +16,18 @@
           </div>
           <ul class="nav-container">
             <li class="item"  id="Manage-My-Account"><a [class.main-active]="isActive('account')" (click)="changePage('account')" ><span>Manage My Account</span></a>
-              <ul class="item-container">
-                <li class="sub" [class.sub-active]="isActive('profile')" (click)="changePage('profile')" id="My-profile"><a>My Profile</a></li>
-                <li class="sub" [class.sub-active]="isActive('address')" (click)="changePage('address')" id="Address-book"><a>Address Book</a></li>
-                <li class="sub" id="Payment-methods"><a>My Payment Options</a></li>
-                <li class="sub" id="e-Wallet"><a>My Wallet</a></li>
-                <li class="sub" id="Vouchers"><a>Vouchers</a></li>
-              </ul>
-            </li>
-            <li class="item" id="My-Orders"><a><span>My Orders</span></a>
-              <ul class="item-container">
-                <li class="sub" id="Returns"><a>My Returns</a></li>
-                <li class="sub" id="Cancellations"><a>My Cancellations</a></li>
-              </ul>
-            </li>
-            <li class="item" id="My-Reviews"><a><span>My Reviews</span></a>
-              <ul class="item-container">
 
-              </ul>
             </li>
-            <li class="item" id="My-Wishlists"><a><span>My Wishlist &amp; Followed Stores</span></a>
-              <ul class="item-container">
+            <li class="item" id="My-Orders"><a><span>My Customers</span></a>
 
-              </ul>
             </li>
-            <li class="item" id="Sell-On-Lazada"><a><span>Sell On Abillionz</span></a>
-              <ul class="item-container">
+            <li class="item" id="My-Reviews"><a><span>My Workers</span></a>
 
-              </ul>
             </li>
+            <li class="item" id="My-Wishlists"><a><span>My Hire Requests</span></a>
+
+            </li>
+
           </ul>
         </div>
         <div class="lzd-playground-right">

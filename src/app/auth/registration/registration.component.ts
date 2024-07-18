@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       ]),
       username: new FormControl('', [
         Validators.required,
-        Validators.minLength(3),
+        Validators.minLength(10),
         Validators.maxLength(100),
       ]),
       password: new FormControl('', [
@@ -76,10 +76,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     let data={
       "name": this.getControlValue('name'),
       "email": this.getControlValue('email'),
-      "username":this.getControlValue('username'),
+      "number":this.getControlValue('username'),
       "password": this.getControlValue('password'),
-      "confirm-password": this.getControlValue('cPassword'),
+
     }
+
 
     const registrationSubscr = this.authService
       .registration(data)
@@ -87,11 +88,18 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       .subscribe((user: any) => {
         console.log(user)
         if (user.success) {
+          localStorage.setItem("userData", JSON.stringify(user.success));
+          const lsValue = localStorage.getItem("userData");
+          console.log(lsValue)
         //  this.router.navigate(['/']);
-        } else if(user.errors) {
+        }
+        else if(user.message){
           this.hasError = true;
-          this.errorMessage =  user.errors.join(', ');
-       //   this.notifier.notify("error",JSON.stringify(user.error.errors))
+          this.errorMessage =  user.message;
+        }
+        else {
+          this.hasError = true;
+          this.errorMessage =  "something went wrong";
         }
       });
     this.unsubscribe.push(registrationSubscr);

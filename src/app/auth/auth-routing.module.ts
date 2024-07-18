@@ -7,10 +7,6 @@ import {AuthGuard} from "./services/auth.guard";
 const routes: Routes = [
   {
     path:'login',
-    canActivate:[AuthGuard],
-    data: {
-      invert: true // auth guard return true mean user is login now invert make it false to not open path
-    },
     component:LoginComponent
   },
   {

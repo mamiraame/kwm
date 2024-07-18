@@ -30,7 +30,7 @@ export class UserAccountComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     let sub = this.user$.subscribe((data:any) => {
       console.log('user account',data)
-      this.user = data.user;
+      this.user = data;
     });
     this.unsubscribe.push(sub)
    this.getLastUrlSegment()
@@ -50,7 +50,6 @@ export class UserAccountComponent implements OnInit,OnDestroy {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
       let page  = params.get('page');
-      console.log('current page',page)
       if(page != null ){
         this.changePage(page)
       }else {

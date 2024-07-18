@@ -17,21 +17,11 @@ export class AuthHTTPService {
   // public methods
 
   login(email: string, password: string):Observable<any>{
-    const response =   fetch(`${API_USERS_URL}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        "email": email,
-        "password": password
-      }),
-    })
-      .then((response) => response.json())
-      .then((data)=>{
-        return data;
-      });
-    return   from(response);
+    const user = {
+      "number":email,
+      "password":password
+    }
+    return this.http.post<any>(API_USERS_URL+"user/login", user);
   }
   getUserByToken(token: string): Observable<UserAllModel> {
     const httpHeaders = new HttpHeaders({
@@ -42,8 +32,14 @@ export class AuthHTTPService {
     });
   }
 
+  // createUser(user: any): Observable<any> {
+  //   return this.http.post<any>(API_USERS_URL+"/register", user);
+  // }
   createUser(user: any): Observable<any> {
-    return this.http.post<any>(API_USERS_URL+"/register", user);
+    return this.http.post<any>(API_USERS_URL+"user/create", user);
+  }
+  updateUser(user: any,id:any): Observable<any> {
+    return this.http.post<any>(API_USERS_URL+"user/update/"+id, user);
   }
 
   // <<----------------------------shipping address-------------------------->>

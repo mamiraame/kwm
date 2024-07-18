@@ -63,11 +63,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     const loginSub = this.authService.login(data.email, data.password)
       .pipe(first())
       .subscribe((user: any) => {
+        console.log(user)
         this.isLoading.loadingLogin = false
-        if (user != undefined && user.user) {
-          this.router.navigate(['/cart']);
-        } else if (user === undefined) {
+        if (user.success) {
+          this.authService.setCurrentUserValue(user.success);
+          localStorage.setItem("userData", JSON.stringify(user.success));
+          //this.router.navigate(['/cart']);
+        } else if(user.message){
           this.hasError = true;
+          this.errorMessage =  user.message;
+        }
+        else  {
+          this.hasError = true;
+          this.errorMessage =  "something went wrong";
         }
       });
     this.unsubscribe.push(loginSub);

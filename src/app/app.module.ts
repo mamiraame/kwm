@@ -13,6 +13,7 @@ import {AuthService} from "./auth/services/auth.service";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {ModalModule} from "ngx-bootstrap/modal";
 import {NotifierOptions,NotifierModule} from "angular-notifier";
+import { AboutComponent } from './about/about.component';
 const notifierDefaultOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -68,6 +69,7 @@ function appInitializer(authService: AuthService) {
 @NgModule({
   declarations: [
     AppComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

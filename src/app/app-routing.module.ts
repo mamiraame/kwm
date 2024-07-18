@@ -4,6 +4,7 @@ import { ContactComponent } from './shared/contact/contact.component';
 import { HomeComponent } from './home/home.component';
 
 import {AuthGuard} from "./auth/services/auth.guard";
+import {AboutComponent} from "./about/about.component";
 
 const routes: Routes = [
 
@@ -11,7 +12,10 @@ const routes: Routes = [
     path:'contact',
     component:ContactComponent
   },
-
+  {
+    path:'about',
+    component:AboutComponent
+  },
   {
     path:"",
     component: HomeComponent,

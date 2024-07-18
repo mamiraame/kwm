@@ -19,7 +19,7 @@ export class AuthService implements OnDestroy {
 
   isLoadingSubject: BehaviorSubject<boolean>;
   // private fields
-  currentUserSubject: BehaviorSubject<UserType>;
+  currentUserSubject: BehaviorSubject<any>;
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
 
   constructor(
@@ -28,29 +28,44 @@ export class AuthService implements OnDestroy {
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
-    this.currentUserSubject = new BehaviorSubject<UserType>(undefined);
+
+
+    try {
+      const lsValue = localStorage.getItem("userData");
+      if (!lsValue) {
+        this.currentUserSubject = new BehaviorSubject<any>(undefined);
+      }
+
+      const parsedValue = lsValue ? JSON.parse(lsValue) : undefined;
+      this.currentUserSubject = new BehaviorSubject<any>(parsedValue);
+    } catch (error) {
+      this.currentUserSubject = new BehaviorSubject<any>(undefined);
+    }
+
+
   }
 
-  get currentUserValue(): UserType {
+  get currentUserValue(): any {
     return this.currentUserSubject.value;
+  }
+   setCurrentUserValue(user: any) {
+    this.currentUserSubject.next(user);
   }
 
   // public methods;
   login(email: string, password: string): Observable<any> {
 
     this.isLoadingSubject.next(true);
-    return this.authHttpService.login(email, password).pipe(
-      map((auth: AuthModel) => {
-        return this.setAuthFromLocalStorage(auth);
+    return this.authHttpService.login(email,password).pipe(
+      map((data: any) => {
+        return data
       }),
-      switchMap(() => this.getUserByToken()),
+
       catchError((err) => {
-        console.error('err', err);
-        return of(undefined);
+        return of(err.error);
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
-
   }
 
   getUserByToken(): Observable<UserType> {
@@ -85,6 +100,19 @@ export class AuthService implements OnDestroy {
   registration(data: any): Observable<any> {
     this.isLoadingSubject.next(true);
     return this.authHttpService.createUser(data).pipe(
+      map((data: any) => {
+        return data
+      }),
+
+      catchError((err) => {
+        return of(err.error);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+  updateUser(data: any,id:any): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.authHttpService.updateUser(data,id).pipe(
       map((data: any) => {
         return data
       }),
