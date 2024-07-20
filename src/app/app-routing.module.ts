@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 
 import {AuthGuard} from "./auth/services/auth.guard";
 import {AboutComponent} from "./about/about.component";
+import {MaidsComponent} from "./maids/maids.component";
 
 const routes: Routes = [
 
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path:'about',
     component:AboutComponent
+  },
+  {
+    path:'maids',
+    component:MaidsComponent
   },
   {
     path:"",

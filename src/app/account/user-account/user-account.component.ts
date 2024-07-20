@@ -21,6 +21,7 @@ export class UserAccountComponent implements OnInit,OnDestroy {
   isLoading = {
     loadingUpdateProfile: false,
   };
+  is_admin : boolean = false
   constructor(public notifierService: NotifierService,private router: Router, private route: ActivatedRoute ,private accountService: AccountService,
               private authService: AuthService,) {
     this.user$ = this.authService.currentUserSubject.asObservable();
@@ -31,9 +32,13 @@ export class UserAccountComponent implements OnInit,OnDestroy {
     let sub = this.user$.subscribe((data:any) => {
       console.log('user account',data)
       this.user = data;
+      this.is_admin = this.isAdmin(data, 'type', 'admin');
     });
     this.unsubscribe.push(sub)
    this.getLastUrlSegment()
+  }
+  isAdmin(obj: any, key: string, value: any): boolean {
+    return obj.hasOwnProperty(key) && obj[key] === value;
   }
   ngOnDestroy(): void {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());

@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {first, Observable, Subscription} from "rxjs";
 import {ConfirmPasswordValidator} from "./confirm-password.validator";
 import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -16,7 +17,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   hasError: boolean = false;
   errorMessage:string = 'The registration details are incorrect'
 
-  constructor(private authService: AuthService,) {
+  constructor(private authService: AuthService, private router: Router) {
 
 
 
@@ -88,10 +89,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       .subscribe((user: any) => {
         console.log(user)
         if (user.success) {
+          this.authService.setCurrentUserValue(user.success);
           localStorage.setItem("userData", JSON.stringify(user.success));
-          const lsValue = localStorage.getItem("userData");
-          console.log(lsValue)
-        //  this.router.navigate(['/']);
+          this.router.navigate(['/user/account']);
         }
         else if(user.message){
           this.hasError = true;

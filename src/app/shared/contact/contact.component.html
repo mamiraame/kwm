@@ -1,99 +1,172 @@
-<main class="main">
+<div>
+  <main class="main">
 
-  <section class="section-box shop-template mt-0">
-    <div class="container">
-      <div class="box-contact">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="contact-form">
-              <h3 class="text-info mt-60">Contact Us</h3>
-              <p class="font-sm color-gray-700 mb-30">Our team would love to hear from you!</p>
-              <div class="row">
-                <div class="col-lg-6 col-md-6">
-                  <div class="form-group">
-                    <input class="form-control" type="text" placeholder="First name">
-                  </div>
+    <section class="section-box shop-template mt-0">
+      <div class="container">
+        <div class="box-contact">
+          <div class="row">
+            <ng-container *ngIf="hasError">
+              <div class="mb-lg-15 alert alert-danger">
+                <div class="alert-text font-weight-bold">
+                  {{errorMessage}}
                 </div>
-                <div class="col-lg-6 col-md-6">
-                  <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Last name">
+              </div>
+            </ng-container>
+            <div class="col-lg-6">
+              <div class="contact-form">
+                <h3 class="text-info mt-60">Contact Us</h3>
+                <p class="font-sm color-gray-700 mb-30">Our team would love to hear from you!</p>
+                <form [formGroup]="registrationForm" (ngSubmit)="submitData()">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                      <div class="form-group">
+                        <input class="form-control" formControlName="fName" name="fName" type="text" placeholder="First name">
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'First name is required',
+        control: registrationForm.controls['fName']
+      }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <div class="form-group">
+                        <input class="form-control" formControlName="lName" name="lName" type="text" placeholder="Last name">
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Last name is required',
+        control: registrationForm.controls['lName']
+      }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email">
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Email is required',
+        control: registrationForm.controls['email']
+      }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <input class="form-control" type="text" name="number" formControlName="number" placeholder="Phone number">
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Number is required',
+        control: registrationForm.controls['number']
+      }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+                        <textarea class="form-control" name="desc" formControlName="desc" placeholder="Message" rows="4"></textarea>
+                        <ng-container
+                          [ngTemplateOutlet]="formError"
+                          [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Message is required',
+        control: registrationForm.controls['desc']
+      }"
+                        ></ng-container>
+                      </div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="form-group">
+
+                        <input [disabled]="registrationForm.invalid" class="font-md-bold btn btn-buy" type="submit" value="Send message">
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" type="email" placeholder="Email">
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="form-control" type="tel" placeholder="Phone number">
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <textarea class="form-control" placeholder="Message" rows="5"></textarea>
-                  </div>
-                </div>
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <input class="btn btn-buy w-auto" type="submit" value="Send message">
-                  </div>
-                </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27213.593047039205!2d74.34325815!3d31.5049528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919045a28ff1d39%3A0xf71e739b84b3c3c!2sGulberg%20III%2C%20Lahore%2C%20Punjab!5e0!3m2!1sen!2s!4v1721300642360!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
           </div>
-          <div class="col-lg-6">
-            <div class="map">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27213.593047039205!2d74.34325815!3d31.5049528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919045a28ff1d39%3A0xf71e739b84b3c3c!2sGulberg%20III%2C%20Lahore%2C%20Punjab!5e0!3m2!1sen!2s!4v1721300642360!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+      </div>
+      <div class="box-contact-support pt-80 pb-50 background-gray-50">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 mb-30 text-center text-lg-start">
+              <h3 class="mb-5">We‘d love to here from you</h3>
+              <p class="font-sm color-gray-700">Chat with our friendly team</p>
+            </div>
+            <div class="col-lg-3 text-center mb-30">
+              <div class="box-image mb-20"><img src="../../../assets/imgs/page/contact/chat.svg" alt="Ecom"></div>
+              <h4 class="mb-5">Chat to sales</h4>
+              <p class="font-sm color-gray-700 mb-5">Speak to our team.</p><a class="font-sm color-gray-900" href="mailto:sales@ecom.com">info@kwc.com</a>
+            </div>
+            <div class="col-lg-3 text-center mb-30">
+              <div class="box-image mb-20"><img src="../../../assets/imgs/page/contact/call.svg" alt="Ecom"></div>
+              <h4 class="mb-5">Call us</h4>
+              <p class="font-sm color-gray-700 mb-5">Mon-Fri from 8am to 5pm</p><a class="font-sm color-gray-900" href="tel:+1(555)000-0000">+92 321 233 4421</a>
+            </div>
+            <div class="col-lg-3 text-center mb-30">
+              <div class="box-image mb-20"><img src="../../../assets/imgs/page/contact/map.svg" alt="Ecom"></div>
+              <h4 class="mb-5">Visit us</h4>
+              <p class="font-sm color-gray-700 mb-5">Visit our office</p><span class="font-sm color-gray-900">205 Gulbery, Lahore<br>Punjab , Pakistan</span>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-    </div>
-    <div class="box-contact-support pt-80 pb-50 background-gray-50">
+    <section class="section-box box-newsletter" style="background:#0E224D ;" >
       <div class="container">
         <div class="row">
-          <div class="col-lg-3 mb-30 text-center text-lg-start">
-            <h3 class="mb-5">We‘d love to here from you</h3>
-            <p class="font-sm color-gray-700">Chat with our friendly team</p>
+          <div class="col-lg-6 col-md-7 col-sm-12">
+            <h3 class="color-white">Subscrible &amp; Get <span class="color-warning">10%</span> Discount</h3>
+            <p class="font-lg color-white">Get E-mail updates about our latest shop and <span class="font-lg-bold">special offers.</span></p>
           </div>
-          <div class="col-lg-3 text-center mb-30">
-            <div class="box-image mb-20"><img src="../../../assets/imgs/page/contact/chat.svg" alt="Ecom"></div>
-            <h4 class="mb-5">Chat to sales</h4>
-            <p class="font-sm color-gray-700 mb-5">Speak to our team.</p><a class="font-sm color-gray-900" href="mailto:sales@ecom.com">info@kwc.com</a>
-          </div>
-          <div class="col-lg-3 text-center mb-30">
-            <div class="box-image mb-20"><img src="../../../assets/imgs/page/contact/call.svg" alt="Ecom"></div>
-            <h4 class="mb-5">Call us</h4>
-            <p class="font-sm color-gray-700 mb-5">Mon-Fri from 8am to 5pm</p><a class="font-sm color-gray-900" href="tel:+1(555)000-0000">+92 321 233 4421</a>
-          </div>
-          <div class="col-lg-3 text-center mb-30">
-            <div class="box-image mb-20"><img src="../../../assets/imgs/page/contact/map.svg" alt="Ecom"></div>
-            <h4 class="mb-5">Visit us</h4>
-            <p class="font-sm color-gray-700 mb-5">Visit our office</p><span class="font-sm color-gray-900">205 Gulbery, Lahore<br>Punjab , Pakistan</span>
+          <div class="col-lg-4 col-md-5 col-sm-12">
+            <div class="box-form-newsletter mt-15">
+              <form class="form-newsletter">
+                <input class="input-newsletter font-xs" value="" placeholder="Your email Address">
+                <button class="btn btn-brand-2">Sign Up</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
+  <ng-template
+    #formError
+    let-control="control"
+    let-message="message"
+    let-validation="validation"
+  >
+    <ng-container
+      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+    >
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>
 
-  <section class="section-box box-newsletter" style="background:#0E224D ;" >
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-md-7 col-sm-12">
-          <h3 class="color-white">Subscrible &amp; Get <span class="color-warning">10%</span> Discount</h3>
-          <p class="font-lg color-white">Get E-mail updates about our latest shop and <span class="font-lg-bold">special offers.</span></p>
-        </div>
-        <div class="col-lg-4 col-md-5 col-sm-12">
-          <div class="box-form-newsletter mt-15">
-            <form class="form-newsletter">
-              <input class="input-newsletter font-xs" value="" placeholder="Your email Address">
-              <button class="btn btn-brand-2">Sign Up</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
+<notifier-container></notifier-container>
+

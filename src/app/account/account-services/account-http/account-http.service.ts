@@ -11,43 +11,31 @@ export class AccountHttpService {
 
   constructor(private http: HttpClient) { }
 
-// ------------------------------products------------------------\\
-
-  create_address(token:string,data:any): Observable<any> {
-    const httpHeaders = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.post<any>(`${API_USERS_URL}/shipping-address/create`, data, {
-      headers: httpHeaders,
-    });
-  }
-  get_address(token:string): Observable<any> {
-    const httpHeaders = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.get<any>(`${API_USERS_URL}/shipping-address/get`, {
-      headers: httpHeaders,
-    });
-  }
-  update_address(token:string,data:any,id:number): Observable<any> {
-    const httpHeaders = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.post<any>(`${API_USERS_URL}/shipping-address/update/${id}`, data, {
-      headers: httpHeaders,
-    });
+  get_all_users(): Observable<any> {
+    return this.http.post<any>(API_USERS_URL+"user/get", {});
   }
 
-  // ------------------------------Profile------------------------\\
-
-  update_profile(token:string,data:any,id:number): Observable<any> {
-    const httpHeaders = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-    return this.http.post<any>(`${API_USERS_URL}/profile/update/${id}`, data, {
-      headers: httpHeaders,
-    });
+  deleteUser(id:any): Observable<any> {
+    return this.http.post<any>(API_USERS_URL+"user/delete/"+id, {});
   }
 
+
+  add_worker(data:any): Observable<any> {
+    return this.http.post<any>(API_USERS_URL+"worker/create", data);
+  }
+  get_all_workers(): Observable<any> {
+    return this.http.post<any>(API_USERS_URL+"worker/get", {});
+  }
+  deleteWorker(id:any): Observable<any> {
+    return this.http.post<any>(API_USERS_URL+"worker/delete/"+id, {});
+  }
+  // contact us
+
+  add_contact_us(data:any): Observable<any> {
+    return this.http.post<any>(API_USERS_URL+"contact/create", data);
+  }
+  get_all_message(): Observable<any> {
+    return this.http.post<any>(API_USERS_URL+"contact/get", {});
+  }
 
 }

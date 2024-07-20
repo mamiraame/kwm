@@ -6,12 +6,15 @@ import { FooterComponent } from './footer/footer.component';
 
 
 import {NotifierModule} from "angular-notifier";
+import {ContactComponent} from "./contact/contact.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
     declarations: [
         HeaderComponent,
         FooterComponent,
+        ContactComponent
     ],
     exports: [
         HeaderComponent,
@@ -21,6 +24,7 @@ import {NotifierModule} from "angular-notifier";
     CommonModule,
     RouterModule,
     NotifierModule,
+    ReactiveFormsModule,
 
 
   ]

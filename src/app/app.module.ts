@@ -14,6 +14,7 @@ import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import {ModalModule} from "ngx-bootstrap/modal";
 import {NotifierOptions,NotifierModule} from "angular-notifier";
 import { AboutComponent } from './about/about.component';
+import { MaidsComponent } from './maids/maids.component';
 const notifierDefaultOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -70,6 +71,7 @@ function appInitializer(authService: AuthService) {
   declarations: [
     AppComponent,
     AboutComponent,
+    MaidsComponent,
   ],
   imports: [
     BrowserModule,

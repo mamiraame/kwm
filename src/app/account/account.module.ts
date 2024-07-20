@@ -4,13 +4,16 @@ import {RouterModule} from "@angular/router";
 import {AccountRoutingModule} from "./account-routing.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UserAccountComponent } from './user-account/user-account.component';
-import { UserSettingComponent } from './user-setting/user-setting.component';
+
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import { MyAccountComponent } from './my-account/my-account.component';
-import { ProfileComponent } from './profile/profile.component';
-import { AddressBookComponent } from './address-book/address-book.component';
+
 import {ModalModule} from "ngx-bootstrap/modal";
 import {NotifierModule, NotifierOptions} from "angular-notifier";
+import { CustomersComponent } from './customers/customers.component';
+import { WorkersComponent } from './workers/workers.component';
+import { AddWorkerComponent } from './add-worker/add-worker.component';
+import { HiringComponent } from './hiring/hiring.component';
 const notifierDefaultOptions: NotifierOptions = {
   position: {
     horizontal: {
@@ -60,10 +63,13 @@ const notifierDefaultOptions: NotifierOptions = {
 
 
     UserAccountComponent,
-        UserSettingComponent,
+
         MyAccountComponent,
-        ProfileComponent,
-        AddressBookComponent,
+         CustomersComponent,
+         WorkersComponent,
+         AddWorkerComponent,
+         HiringComponent,
+
 
   ],
   imports: [

@@ -1,43 +1,11 @@
 
-<!-- <div class="topbar top-gray-1000  ">
-    <div class="container-topbar">
-      <div class="menu-topbar-left d-none d-xl-block">
-        <ul class="nav-small">
-          <li><a class="font-xs" href="page-about-us.html">About Us</a></li>
 
-          <li><a class="font-xs" href="page-register.html">Open a shop</a></li>
-        </ul>
-      </div>
-      <div class="info-topbar text-center d-none d-xl-block"><span class="font-xs color-brand-3">Free shipping for all orders over</span><span class="font-sm-bold color-success">  $75.00</span></div>
-      <div class="menu-topbar-right"><span class="font-xs color-brand-3">Need help? Call Us:</span><span class="font-sm-bold color-success"> + 1800 900</span>
-        <div class="dropdown dropdown-language">
-          <button class="btn dropdown-toggle" id="dropdownPage" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static"><span class="dropdown-right font-xs color-brand-3"><img src="assets/imgs/template/en.svg" alt="Ecom"> English</span></button>
-          <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="dropdownPage" data-bs-popper="static">
-            <li><a class="dropdown-item" href="#"><img src="assets/imgs/template/flag-en.svg" alt="Ecom"> English</a></li>
-            <li><a class="dropdown-item" href="#"><img src="assets/imgs/template/flag-fr.svg" alt="Ecom"> Français</a></li>
-            <li><a class="dropdown-item" href="#"><img src="assets/imgs/template/flag-es.svg" alt="Ecom"> Español</a></li>
-            <li><a class="dropdown-item" href="#"><img src="assets/imgs/template/flag-pt.svg" alt="Ecom"> Português</a></li>
-            <li><a class="dropdown-item" href="#"><img src="assets/imgs/template/flag-cn.svg" alt="Ecom"> 中国人</a></li>
-          </ul>
-        </div>
-        <div class="dropdown dropdown-language">
-          <button class="btn dropdown-toggle" id="dropdownPage2" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static"><span class="dropdown-right font-xs color-brand-3">USD</span></button>
-          <ul class="dropdown-menu dropdown-menu-light dropdown-menu-end" aria-labelledby="dropdownPage2" data-bs-popper="static">
-            <li><a class="dropdown-item active" href="#">USD</a></li>
-            <li><a class="dropdown-item" href="#">EUR</a></li>
-            <li><a class="dropdown-item" href="#">AUD</a></li>
-            <li><a class="dropdown-item" href="#">SGP</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div> -->
 <header class="header header-container sticky-bar   " [ngClass]="{ 'stick': isSticky }">
   <div class="container">
     <div class="main-header">
       <div class="header-left">
         <div class="header-logo"><a href="index.html">
-          <h3>KWC</h3>
+          <h3>KWM</h3>
         </a></div>
         <div class="header-search">
 
@@ -49,7 +17,7 @@
                 <a class="active" routerLink="/home" >Home</a>
 
               </li>
-              <li><a routerLink="/shop" >Service</a>
+              <li><a routerLink="/maids" >Service</a>
 
               </li>
               <li><a routerLink="/about"  >About Us</a></li>
@@ -63,24 +31,26 @@
           </div>
         </div>
         <div class="header-shop">
-          <div class="d-inline-block box-dropdown-cart">
-            <span class="font-lg icon-list icon-account" (click)="accountModel()" ><span >Account</span></span>
+          <div (click)="accountModel()" class="d-inline-block box-dropdown-cart">
+            <p><span class="font-lg icon-list icon-account  "  style="position: relative; top: 10px;"></span> {{(user)?user.name:'Account'}} </p>
             <div [ngClass]="isAccount"  class="dropdown-account">
               <ul>
                 <ng-container *ngIf="user$ | async as _user ; else notLoggedIn">
                   <li><a href="/#/user/account">My Account</a></li>
+                  <li><a (click)="logout()" class="sign-out-link">Sign out</a></li>
                 </ng-container>
                 <ng-template #notLoggedIn>
                   <li ><a href="/#/auth/login">Login</a></li>
+                  <li ><a href="/#/auth/registration">Register</a></li>
                 </ng-template>
 
 
-                <li><a (click)="logout()" class="sign-out-link">Sign out</a></li>
+
               </ul>
             </div>
           </div>
           <a class="font-lg icon-list icon-wishlist d-none " >
-            <span>Wishlist</span><span class="number-item font-xs">5</span>
+
           </a>
           <a class="font-lg icon-list   " >
 
@@ -94,98 +64,4 @@
   </div>
 
 </header>
-<div class="mobile-header-active mobile-header-wrapper-style perfect-scrollbar">
-  <div class="mobile-header-wrapper-inner">
-    <div class="mobile-header-content-area">
-      <div class="mobile-logo"><a class="d-flex" href="index.html"><img alt="Ecom" src="assets/imgs/template/logo.svg"></a></div>
-      <div class="perfect-scroll">
-        <div class="mobile-menu-wrap mobile-header-border">
-          <nav class="mt-15">
-            <ul class="mobile-menu font-heading">
-              <li class="has-children"><a class="active" href="index.html">Home</a>
-                <ul class="sub-menu">
-                  <li><a href="index.html">Homepage - 1</a></li>
-                  <li><a href="index-2.html">Homepage - 2</a></li>
-                  <li><a href="index-3.html">Homepage - 3</a></li>
-                  <li><a href="index-4.html">Homepage - 4</a></li>
-                  <li><a href="index-5.html">Homepage - 5</a></li>
-                  <li><a href="index-6.html">Homepage - 6</a></li>
-                  <li><a href="index-7.html">Homepage - 7</a></li>
-                  <li><a href="index-8.html">Homepage - 8</a></li>
-                  <li><a href="index-9.html">Homepage - 9</a></li>
-                  <li><a href="index-10.html">Homepage - 10</a></li>
-                </ul>
-              </li>
-              <li class="has-children"><a href="shop-grid.html">Shop</a>
-                <ul class="sub-menu">
-                  <li><a href="shop-grid.html">Shop Grid</a></li>
-                  <li><a href="shop-grid-2.html">Shop Grid 2</a></li>
-                  <li><a href="shop-list.html">Shop List</a></li>
-                  <li><a href="shop-list-2.html">Shop List 2</a></li>
-                  <li><a href="shop-fullwidth.html">Shop Fullwidth</a></li>
-                  <li><a href="shop-single-product.html">Single Product</a></li>
-                  <li><a href="shop-single-product-2.html">Single Product 2</a></li>
-                  <li><a href="shop-single-product-3.html">Single Product 3</a></li>
-                  <li><a href="shop-single-product-4.html">Single Product 4</a></li>
-                  <li><a href="shop-cart.html">Shop Cart</a></li>
-                  <li><a href="shop-checkout.html">Shop Checkout</a></li>
-                  <li><a href="shop-compare.html">Shop Compare</a></li>
-                  <li><a href="shop-wishlist.html">Shop Wishlist</a></li>
-                </ul>
-              </li>
-              <li class="has-children"><a href="shop-vendor-list.html">Vendors</a>
-                <ul class="sub-menu">
-                  <li><a href="shop-vendor-list.html">Vendors Listing</a></li>
-                  <li><a href="shop-vendor-single.html">Vendor Single</a></li>
-                </ul>
-              </li>
-              <li class="has-children"><a href="#">Pages</a>
-                <ul class="sub-menu">
-                  <li><a href="page-about-us.html">About Us</a></li>
-                  <li><a href="page-contact.html">Contact Us</a></li>
-                  <li><a href="page-careers.html">Careers</a></li>
-                  <li><a href="page-term.html">Term and Condition</a></li>
-                  <li><a href="page-register.html">Register</a></li>
-                  <li><a href="page-login.html">Login</a></li>
-                  <li><a href="page-404.html">Error 404</a></li>
-                </ul>
-              </li>
-              <li class="has-children"><a href="blog.html">Blog</a>
-                <ul class="sub-menu">
-                  <li><a href="blog.html">Blog Grid</a></li>
-                  <li><a href="blog-2.html">Blog Grid 2</a></li>
-                  <li><a href="blog-list.html">Blog List</a></li>
-                  <li><a href="blog-big.html">Blog Big</a></li>
-                  <li><a href="blog-single.html">Blog Single - Left sidebar</a></li>
-                  <li><a href="blog-single-2.html">Blog Single - Right sidebar</a></li>
-                  <li><a href="blog-single-3.html">Blog Single - No sidebar</a></li>
-                </ul>
-              </li>
-              <li><a href="page-contact.html">Contact</a></li>
-            </ul>
-          </nav>
-        </div>
-        <div class="mobile-account">
-          <div class="mobile-header-top">
-            <div class="user-account"><a href="page-account.html"><img src="assets/imgs/template/ava_1.png" alt="Ecom"></a>
-              <div class="content">
-                <h6 class="user-name">Hello<span class="text-brand"> Steven !</span></h6>
-                <p class="font-xs text-muted">You have 3 new messages</p>
-              </div>
-            </div>
-          </div>
-          <ul class="mobile-menu">
-            <li><a href="page-account.html">My Account</a></li>
-            <li><a href="page-account.html">Order Tracking</a></li>
-            <li><a href="page-account.html">My Orders</a></li>
-            <li><a href="page-account.html">My Wishlist</a></li>
-            <li><a href="page-account.html">Setting</a></li>
-            <li><a href="page-login.html">Sign out</a></li>
-          </ul>
-        </div>
 
-        <div class="site-copyright color-gray-400 mt-30">Copyright 2022 &copy; Ecom - Marketplace Template.<br>Designed by<a href="http://alithemes.com" target="_blank">&nbsp; AliThemes</a></div>
-      </div>
-    </div>
-  </div>
-</div>

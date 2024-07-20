@@ -1,0 +1,223 @@
+<div  id="container">
+  <main class="main">
+    <section class="section-box shop-template mt-10">
+      <div class="container">
+        <div class="row mb-100">
+          <div class="col-lg-1"></div>
+          <form [formGroup]="registrationForm" (ngSubmit)="submitData()">
+            <div class="col">
+              <h5>Add new worker</h5>
+              <ng-container *ngIf="hasError">
+                <div class="mb-lg-15 alert alert-danger">
+                  <div class="alert-text font-weight-bold">
+                    {{errorMessage}}
+                  </div>
+                </div>
+              </ng-container>
+
+              <div  class=" mt-30 mb-30">
+                <div class="d-flex gap-5 ">
+
+                  <div class="form-group fv-row w-100 flex-md-root">
+                    <label class="mb-5 font-sm color-gray-700">Full Name *</label>
+                    <input class="form-control" formControlName="name" name="name" type="text" placeholder="Enter your name">
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Full name is required',
+        control: registrationForm.controls['name']
+      }"
+                    ></ng-container>
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Full name should have at least 3 symbols',
+        control: registrationForm.controls['name']
+      }"
+                    ></ng-container>
+
+                  </div>
+                  <div class="form-group fv-row w-100 flex-md-root">
+                    <label class="mb-5 font-sm color-gray-700">Email *</label>
+                    <input class="form-control" name="email"
+                           formControlName="email" type="email" placeholder="Enter your email">
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Email is required',
+        control: registrationForm.controls['email']
+      }"
+                    ></ng-container>
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'email',
+        message: 'Email is invalid',
+        control: registrationForm.controls['email']
+      }"
+                    ></ng-container>
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'minlength',
+        message: 'Email should have at least 3 symbols',
+        control: registrationForm.controls['email']
+      }"
+                    ></ng-container>
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'maxLength',
+        message: 'Email should have maximum 360 symbols',
+        control: registrationForm.controls['email']
+      }"
+                    ></ng-container>
+                  </div>
+
+                </div>
+                <div class="d-flex gap-5 ">
+                  <div class="form-group fv-row w-100 flex-md-root">
+                    <label class="mb-5 font-sm color-gray-700">Mobile No *</label>
+                    <input class="form-control" type="text" name="username" formControlName="username" placeholder="Enter mobile number">
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'number is required',
+        control: registrationForm.controls['username']
+      }"
+                    ></ng-container>
+                  </div>
+                  <div class="form-group fv-row w-100 flex-md-root">
+                    <label class="mb-5 font-sm color-gray-700">City *</label>
+                    <input class="form-control" name="city" formControlName="city" type="text" placeholder="Enter your city name">
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'City is required',
+        control: registrationForm.controls['city']
+      }"
+                    ></ng-container>
+
+                  </div>
+                </div>
+                <div class="d-flex gap-5 ">
+                  <div class="form-group fv-row w-100 flex-md-root">
+                    <label class="mb-5 font-sm color-gray-700">Zip Code *</label>
+                    <input class="form-control" type="text" name="code" formControlName="code" placeholder="Enter zip code">
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'zip code is required',
+        control: registrationForm.controls['code']
+      }"
+                    ></ng-container>
+                  </div>
+                  <div class="form-group fv-row w-100 flex-md-root">
+                    <label class="mb-5 font-sm color-gray-700"> Street Address *</label>
+                    <input class="form-control" name="address" formControlName="address" type="text" placeholder="Enter full address">
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'address is required',
+        control: registrationForm.controls['address']
+      }"
+                    ></ng-container>
+
+                  </div>
+                </div>
+
+                <div class="d-flex gap-5 ">
+                  <div class="form-group fv-row w-100 flex-md-root">
+                    <label class="mb-5 font-sm color-gray-700">Age *</label>
+                    <input class="form-control" type="text" name="age" formControlName="age" placeholder="Enter age">
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Age is required',
+        control: registrationForm.controls['age']
+      }"
+                    ></ng-container>
+                  </div>
+                  <div class="form-group fv-row w-100 flex-md-root">
+                    <label class="mb-5 font-sm color-gray-700"> Image *</label>
+                    <input class="form-control" (change)="onFileChange($event)" name="image" formControlName="image" type="file" placeholder="Select Image">
+                    <ng-container
+                      [ngTemplateOutlet]="formError"
+                      [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'image is required',
+        control: registrationForm.controls['image']
+      }"
+                    ></ng-container>
+
+                  </div>
+                </div>
+                <div class="d-flex gap-5 ">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <textarea class="form-control" name="desc" formControlName="desc" placeholder="Detail about worker" rows="3"></textarea>
+                      <ng-container
+                        [ngTemplateOutlet]="formError"
+                        [ngTemplateOutletContext]="{
+        validation: 'required',
+        message: 'Detail is required',
+        control: registrationForm.controls['desc']
+      }"
+                      ></ng-container>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="d-flex gap-5 ">
+                  <div class="form-group fv-row w-100 flex-md-root">
+
+                  </div>
+                  <div class="form-group d-flex fv-row w-100  justify-content-end   flex-md-root">
+
+                    <div class="form-group  fv-row  w-50  flex-md-root">
+                      <input [disabled]="registrationForm.invalid" class="font-md-bold btn btn-buy" type="submit" value="Submit">
+                    </div>
+
+                  </div>
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <ng-template
+    #formError
+    let-control="control"
+    let-message="message"
+    let-validation="validation"
+  >
+    <ng-container
+      *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+    >
+      <div class="fv-plugins-message-container">
+        <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+        </div>
+      </div>
+    </ng-container>
+  </ng-template>
+</div>

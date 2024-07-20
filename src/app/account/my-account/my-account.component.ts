@@ -66,6 +66,9 @@ export class MyAccountComponent implements OnInit,OnDestroy {
     this.registrationForm.get('name')?.setValue(data.name)
     this.registrationForm.get('email')?.setValue(data.email)
     this.registrationForm.get('username')?.setValue(data.number)
+    this.registrationForm.get('city')?.setValue(('city' in data)? data.city:"")
+    this.registrationForm.get('code')?.setValue(('code' in data)? data.code:"")
+    this.registrationForm.get('address')?.setValue(('address' in data)? data.address:"")
 
   }
 
@@ -101,10 +104,9 @@ export class MyAccountComponent implements OnInit,OnDestroy {
         console.log(user)
         if (user.success) {
           this.notifier.notify("success","Updated Successfully")
-        //  localStorage.setItem("userData", JSON.stringify(user.success));
-        //  const lsValue = localStorage.getItem("userData");
-         // console.log(lsValue)
-          //  this.router.navigate(['/']);
+          this.authService.setCurrentUserValue(user.success);
+          localStorage.setItem("userData", JSON.stringify(user.success));
+
         }
         else if(user.message){
           this.hasError = true;
@@ -114,6 +116,7 @@ export class MyAccountComponent implements OnInit,OnDestroy {
         else {
           this.hasError = true;
           this.errorMessage =  "something went wrong";
+          this.notifier.notify("error","unable to update")
         }
       });
     this.unsubscribe.push(registrationSubscr);

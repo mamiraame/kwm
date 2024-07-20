@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable, of, Subject, Subscription} from "rxjs";
 import {AccountHttpService} from "./account-http/account-http.service";
 import {catchError, finalize, map} from "rxjs/operators";
 import {environment} from "../../../environments/environment";
-import {AuthModel} from "../../auth/models/auth.model";
+
 
 
 @Injectable({
@@ -27,95 +27,100 @@ export class AccountService implements OnDestroy{
 
 
 
-  // <<------------------------------ address ------------------------>>
-  get_address(){
-    const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.token) {
-      return of(undefined);
-    }
+  get_all_users(): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.accountHttpService.get_address(auth.token).pipe(
+    return this.accountHttpService.get_all_users().pipe(
       map((data: any) => {
-        return data;
+        return data
       }),
+
       catchError((err) => {
-        console.log("error",err)
+        return of(err.error);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+  deleteUser(id:any): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.accountHttpService.deleteUser(id).pipe(
+      map((data: any) => {
+        return data
+      }),
+
+      catchError((err) => {
         return of(err.error);
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
-  create_address(data:any){
-    const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.token) {
-      return of(undefined);
-    }
+  add_worker(data:any): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.accountHttpService.create_address(auth.token,data).pipe(
+    return this.accountHttpService.add_worker(data).pipe(
       map((data: any) => {
-        return data;
+        return data
       }),
+
       catchError((err) => {
-        console.log("error",err)
+        return of(err.error);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+  get_all_workers(): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.accountHttpService.get_all_workers().pipe(
+      map((data: any) => {
+        return data
+      }),
+
+      catchError((err) => {
+        return of(err.error);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+  deleteWorker(id:any): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.accountHttpService.deleteWorker(id).pipe(
+      map((data: any) => {
+        return data
+      }),
+
+      catchError((err) => {
         return of(err.error);
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
-  update_address(data:any,id:number){
-    const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.token) {
-      return of(undefined);
-    }
+  // contact
+
+  add_contact_us(data:any): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.accountHttpService.update_address(auth.token,data,id).pipe(
+    return this.accountHttpService.add_contact_us(data).pipe(
       map((data: any) => {
-        return data;
+        return data
       }),
+
       catchError((err) => {
-        console.log("error",err)
         return of(err.error);
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
-
-  // <<------------------------------ Profile ------------------------>>
-
-  update_profile(data:any,id:number){
-    const auth = this.getAuthFromLocalStorage();
-    if (!auth || !auth.token) {
-      return of(undefined);
-    }
+  get_all_message(): Observable<any> {
     this.isLoadingSubject.next(true);
-    return this.accountHttpService.update_profile(auth.token,data,id).pipe(
+    return this.accountHttpService.get_all_message().pipe(
       map((data: any) => {
-        return data;
+        return data
       }),
+
       catchError((err) => {
-        console.log("error",err)
         return of(err.error);
       }),
       finalize(() => this.isLoadingSubject.next(false))
     );
-  }
-
-
-  // <<------------------------------ local Storage ------------------------>>
-  getAuthFromLocalStorage(): AuthModel | undefined {
-    try {
-      const lsValue = localStorage.getItem(this.authLocalStorageToken);
-      if (!lsValue) {
-        return undefined;
-      }
-
-      return JSON.parse(lsValue);
-    } catch (error) {
-      console.error(error);
-      return undefined;
-    }
   }
 
   ngOnDestroy(): void {

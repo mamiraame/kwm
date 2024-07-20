@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (user.success) {
           this.authService.setCurrentUserValue(user.success);
           localStorage.setItem("userData", JSON.stringify(user.success));
-          //this.router.navigate(['/cart']);
+          this.router.navigate(['/user/account']);
         } else if(user.message){
           this.hasError = true;
           this.errorMessage =  user.message;

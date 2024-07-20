@@ -1,6 +1,5 @@
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {first, Observable, Subscription} from "rxjs";
-import {BasicService} from "../../services/basic.service";
 import {AuthService} from "../../auth/services/auth.service";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 
@@ -18,45 +17,31 @@ export class HeaderComponent implements OnInit,OnDestroy {
   isAccount:string = ''
 
   user$: Observable<any>;
-
+  user:any
   isSticky: boolean = false;
 
 
-  constructor(private authService: AuthService,private basicService: BasicService,private activeRouter:ActivatedRoute) {
-
-
+  constructor(private authService: AuthService,private activeRouter:ActivatedRoute) {
     this.user$ = this.authService.currentUserSubject.asObservable();
   }
 
 
   ngOnInit(): void {
-    this.get_categories();
+
     // deduct route change and set menu hide
     this.activeRouter.paramMap.subscribe((params: ParamMap) => {
       this.isAccount = ''
     });
 
 
-    this.user$.subscribe((data:any) => {
-      console.log('login user',data)
+   const  sub = this.user$.subscribe((data:any) => {
+     this.user = data
     });
+   this.unsubscribe.push(sub)
 
   }
 
-  get_categories(){
-    const sub = this.basicService.get_categories()
-      .pipe(first())
-      .subscribe((res: any) => {
-        if (res.success) {
-          for (var key in res.success){
-              this.categories.push(res.success[key])
-          }
 
-        }
-      })
-    this.unsubscribe.push(sub);
-
-  }
 
   accountModel(){
     this.isAccount = this.isAccount === 'dropdown-open' ? '' : 'dropdown-open';

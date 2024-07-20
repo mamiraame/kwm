@@ -15,16 +15,16 @@
 
           </div>
           <ul class="nav-container">
-            <li class="item"  id="Manage-My-Account"><a [class.main-active]="isActive('account')" (click)="changePage('account')" ><span>Manage My Account</span></a>
+            <li  class="item"  id="Manage-My-Account"><a [class.main-active]="isActive('account')" (click)="changePage('account')" ><span>Manage My Account</span></a>
 
             </li>
-            <li class="item" id="My-Orders"><a><span>My Customers</span></a>
+            <li *ngIf="is_admin"  class="item" id="My-Orders"><a [class.main-active]="isActive('customer')" (click)="changePage('customer')" ><span>My Customers</span></a>
 
             </li>
-            <li class="item" id="My-Reviews"><a><span>My Workers</span></a>
+            <li *ngIf="is_admin"  class="item" id="My-Reviews"><a [class.main-active]="isActive('worker') || isActive('add-worker')"  (click)="changePage('worker')" ><span>My Workers</span></a>
 
             </li>
-            <li class="item" id="My-Wishlists"><a><span>My Hire Requests</span></a>
+            <li *ngIf="is_admin"  class="item" id="My-Wishlists"><a [class.main-active]="isActive('message')" (click)="changePage('message')"><span>My Hire Message</span></a>
 
             </li>
 
@@ -38,13 +38,21 @@
           <ng-container *ngIf="pageType==='account'">
             <app-my-account [user]="user"></app-my-account>
           </ng-container>
-          <!-- profile-->
-          <ng-container *ngIf="pageType==='profile'">
-            <app-profile></app-profile>
+          <!--customer-->
+          <ng-container *ngIf="pageType==='customer'">
+            <app-customers ></app-customers>
           </ng-container>
-          <!-- address book -->
-          <ng-container *ngIf="pageType==='address'">
-            <app-address-book></app-address-book>
+          <!--workers-->
+          <ng-container *ngIf="pageType==='worker'">
+            <app-workers ></app-workers>
+          </ng-container>
+          <!--workers-->
+          <ng-container *ngIf="pageType==='add-worker'">
+            <app-add-worker ></app-add-worker>
+          </ng-container>
+          <!--message-->
+          <ng-container *ngIf="pageType==='message'">
+            <app-hiring ></app-hiring>
           </ng-container>
         </div>
       </div>

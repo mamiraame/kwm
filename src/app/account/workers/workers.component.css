@@ -1,0 +1,7 @@
+.hover-text-danger:hover {
+  color: #dc3545;
+  cursor: pointer/* Red color on hover */
+}
+.hover-text-danger {
+  color: #0b0b0b;
+}

@@ -1,0 +1,23 @@
+<main class="main ">
+  <section class="section-box shop-template">
+    <div class="container my-30">
+      <div class="row mt-10">
+
+        <div class="col-md-4" *ngFor="let candidate of userList">
+          <div class="card mb-4 shadow-sm">
+            <div class="card-body text-center">
+              <img [src]="'http://localhost:3000/'+candidate.image" class="rounded-circle mb-3" alt="Avatar" width="80" height="80">
+              <h5 class="card-title">{{ candidate.name }}</h5>
+              <p class="card-text">{{ candidate.age }} years, {{ candidate.city }}</p>
+              <p class="card-text mb-3">{{ candidate.desc }}</p>
+              <button class="btn btn-primary" (click)="submitData(candidate)">Hire Me</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<notifier-container></notifier-container>

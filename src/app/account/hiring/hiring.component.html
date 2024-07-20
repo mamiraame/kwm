@@ -1,0 +1,27 @@
+<!-- user-messages.component.html -->
+<div class="container mt-4">
+  <h4 class="mb-2">User Messages</h4>
+
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Number</th>
+      <th>Email</th>
+      <th>Description</th>
+      <th>Hiree Info</th>
+      <th>Page</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of Messages">
+      <td>{{ user.name }}</td>
+      <td>{{ user.number }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.desc }}</td>
+      <td></td>
+      <td>{{ user.page }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
